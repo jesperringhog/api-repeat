@@ -17,7 +17,7 @@ registerRouter.post("/", async (req, res) => {
   try {
     const success = await createUser({ name, email, password });
 
-    if (!success) return res.status(400).json({ message: "Register failed" });
+    if (!success) return res.status(404).json({ message: "Register failed" });
 
     const dto = dbUserToDto(success);
 

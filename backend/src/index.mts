@@ -6,6 +6,7 @@ import { config } from "dotenv";
 import { ioOnConnection } from "./sockets/ioOnConnection.mjs";
 import mongoose from "mongoose";
 import { registerRouter } from "./routes/registerRouter.mjs";
+import { loginRouter } from "./routes/loginRouter.mjs";
 
 config();
 
@@ -24,6 +25,7 @@ app.use(cors({ origin: frontendUrl, credentials: true }));
 const server = createServer(app);
 
 app.use("/register", registerRouter);
+app.use("/login", loginRouter);
 
 const io = new Server(server, {
   cors: {
