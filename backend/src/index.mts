@@ -9,16 +9,17 @@ import { registerRouter } from "./routes/registerRouter.mjs";
 
 config();
 
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 const mongoUri = process.env.MONGO_URI || "";
-const frontendUrl = process.env.FRONTEND_URL;
+const frontendUrl = process.env.FRONTEND_URL || "http://localhost:5173";
 
 if (!port) throw Error("PORT does not exist in .env/invalid key value");
 if (!frontendUrl)
   throw Error("FRONTEND_URL does not exist in .env/invalid key value");
 
 const app = express();
-app.use(cors());
+app.use(express.json());
+app.use(cors({ origin: frontendUrl, credentials: true }));
 
 const server = createServer(app);
 
@@ -32,12 +33,14 @@ const io = new Server(server, {
 
 ioOnConnection(io);
 
-server.listen(port, async () => {
-  try {
-    await mongoose.connect(mongoUri);
-  } catch (error) {
-    console.error(error);
-  }
+try {
+  await mongoose.connect(mongoUri);
+} catch (error) {
+  console.error(error);
+}
 
-  console.log(`Server is running on port: ${port}, connected to database: ${mongoose.connection.name}`);
+server.listen(port, async () => {
+  console.log(
+    `Server is running on port: ${port}, connected to database: ${mongoose.connection.name}`,
+  );
 });

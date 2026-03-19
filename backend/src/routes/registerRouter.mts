@@ -1,10 +1,11 @@
 import express from "express";
-import type { User } from "../models/User.mjs";
+import { dbUserToDto, type dbUser, type User } from "../models/User.mjs";
+import { createUser } from "../controllers/registerController.mjs";
 
 export const registerRouter = express.Router();
 
 registerRouter.post("/", async (req, res) => {
-  const { name, email, password }: User = req.body;
+  const { name, email, password }: dbUser = req.body;
 
   if (!name && name.trim() === "")
     return res.status(400).json({ message: "No valid name input" });
@@ -14,9 +15,15 @@ registerRouter.post("/", async (req, res) => {
     return res.status(400).json({ message: "No valid password input" });
 
   try {
-    const createdUser = await createUser({name, email, password});
-  } catch (error) {
+    const success = await createUser({ name, email, password });
+
+    if (!success) return res.status(400).json({ message: "Register failed" });
+
+    const dto = dbUserToDto(success);
+
+    res.status(200).json(dto);
+  } catch (error: any) {
     console.error(error);
-    res.status(500).json(error);
+    res.status(500).json({error: error.message});
   }
 });
