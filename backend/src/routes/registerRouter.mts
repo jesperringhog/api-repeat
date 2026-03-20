@@ -1,6 +1,6 @@
 import express from "express";
-import { dbUserToDto, type dbUser, type User } from "../models/User.mjs";
 import { createUser } from "../controllers/registerController.mjs";
+import { dbUserToDto, type dbUser } from "../models/User.mjs";
 
 export const registerRouter = express.Router();
 

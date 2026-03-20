@@ -7,7 +7,7 @@
     <title>register</title>
   </head>
   <body>
-    <header>
+    <header id="header">
       <nav>
         <a href="index.html">
           <button>Home</button>
@@ -16,25 +16,25 @@
           <button>Register</button>
         </a>
       </nav>
-    </header>
-    <div id="app">
-      <h1>Login</h1>
       <form id="loginForm">
         <div class="inputContainer">
-          <label for="loginEmail">Email:</label>
-          <input
-            type="email"
-            id="loginEmail"
-            placeholder="example@mail.com"
-          />
-        </div>
-        <div class="inputContainer">
-          <label for="loginPassword">Password:</label>
-          <input type="password" id="loginPassword" placeholder="3x4mpl3" />
+          <div class="credentialContainer">
+            <label for="loginEmail">Email:</label>
+            <input
+              type="email"
+              id="loginEmail"
+              placeholder="example@mail.com"
+            />
+          </div>
+          <div class="credentialContainer">
+            <label for="loginPassword">Password:</label>
+            <input type="password" id="loginPassword" placeholder="3x4mpl3" />
+          </div>
         </div>
         <button>Login</button>
       </form>
-    </div>
-    <script type="module" src="/src/register.ts"></script>
+    </header>
+    <div id="app"></div>
+    <script type="module" src="/src/login.ts"></script>
   </body>
 </html>

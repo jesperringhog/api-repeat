@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
-import { User, type dbUser } from "../models/User.mjs";
+import User from "../models/User.mjs";
 
 export const loginUser = async (email: string, password: string) => {
   const found = await User.findOne({ email });

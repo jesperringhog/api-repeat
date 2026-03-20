@@ -3,13 +3,19 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10rem;
+  gap: 1rem;
 
   a {
     text-decoration: none;
   }
-  
+
   button {
+    padding: 1rem;
     cursor: pointer;
+
+    &:hover {
+      background-color: black;
+      color: white;
+    }
   }
 }

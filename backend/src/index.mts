@@ -7,25 +7,35 @@ import { ioOnConnection } from "./sockets/ioOnConnection.mjs";
 import mongoose from "mongoose";
 import { registerRouter } from "./routes/registerRouter.mjs";
 import { loginRouter } from "./routes/loginRouter.mjs";
+import cookieParser from "cookie-parser";
+import { auth } from "./middlewares/auth.mjs";
 
 config();
 
-const port = process.env.PORT || 3000;
-const mongoUri = process.env.MONGO_URI || "";
-const frontendUrl = process.env.FRONTEND_URL || "http://localhost:5173";
+const port = process.env.PORT;
+const mongoUri = process.env.MONGO_URI;
+const frontendUrl = process.env.FRONTEND_URL;
+const jwtSecret = process.env.JWT_SECRET;
 
 if (!port) throw Error("PORT does not exist in .env/invalid key value");
+if (!mongoUri)
+  throw Error("MONGO_URI does not exist in .env/invalid key value");
 if (!frontendUrl)
   throw Error("FRONTEND_URL does not exist in .env/invalid key value");
+if (!jwtSecret)
+  throw Error("JWT_SECRET does not exist in .env/invalid key value");
 
 const app = express();
+
 app.use(express.json());
 app.use(cors({ origin: frontendUrl, credentials: true }));
-
-const server = createServer(app);
+app.use(cookieParser());
 
 app.use("/register", registerRouter);
 app.use("/login", loginRouter);
+app.use("/chat", auth);
+
+const server = createServer(app);
 
 const io = new Server(server, {
   cors: {
@@ -35,13 +45,12 @@ const io = new Server(server, {
 
 ioOnConnection(io);
 
-try {
-  await mongoose.connect(mongoUri);
-} catch (error) {
-  console.error(error);
-}
-
 server.listen(port, async () => {
+  try {
+    await mongoose.connect(mongoUri);
+  } catch (error) {
+    console.error(error);
+  }
   console.log(
     `Server is running on port: ${port}, connected to database: ${mongoose.connection.name}`,
   );

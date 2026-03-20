@@ -4,12 +4,13 @@ export const loginUser = async (email: string, password: string) => {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
-        email: email,
-        password: password,
+        email,
+        password,
       }),
+      credentials: "include",
     });
 
-    if (response.status === 200) return response.ok;
+    return response.json();
   } catch (error) {
     console.error(error);
   }

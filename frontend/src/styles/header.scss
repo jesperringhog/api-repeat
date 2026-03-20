@@ -1,6 +1,24 @@
 header {
-  padding: 1rem;
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+
+  form {
+    display: flex;
+    gap: 0.5rem;
+
+    .inputContainer {
+      .credentialContainer {
+        display: flex;
+        justify-content: end;
+        margin-bottom: 0.5rem;
+        gap: 0.5rem;
+      }
+    }
+
+    button {
+      height: fit-content;
+      cursor: pointer;
+    }
+  }
 }

@@ -7,7 +7,7 @@
     <title>register</title>
   </head>
   <body>
-    <header>
+    <header id="header">
       <nav>
         <a href="index.html">
           <button>Home</button>
@@ -16,33 +16,33 @@
           <button>Login</button>
         </a>
       </nav>
-    </header>
-    <div id="app">
-      <h1>Register</h1>
-      <form id="registerForm">
+      <form id="loginForm">
         <div class="inputContainer">
-          <label for="registerName">Username:</label>
-          <input
-            type="text"
-            id="registerName"
-            placeholder="Example"
-          />
-        </div>
-        <div class="inputContainer">
-          <label for="registerEmail">Email:</label>
-          <input
-            type="email"
-            id="registerEmail"
-            placeholder="example@mail.com"
-          />
-        </div>
-        <div class="inputContainer">
-          <label for="registerPassword">Password:</label>
-          <input type="password" id="registerPassword" placeholder="3x4mpl3" />
+          <div class="credentialContainer">
+            <label for="registerName">Username:</label>
+            <input
+              type="text"
+              id="registerName"
+              placeholder="Example"
+            />
+          </div>
+          <div class="credentialContainer">
+            <label for="registerEmail">Email:</label>
+            <input
+              type="email"
+              id="registerEmail"
+              placeholder="example@mail.com"
+            />
+          </div>
+          <div class="credentialContainer">
+            <label for="registerPassword">Password:</label>
+            <input type="password" id="registerPassword" placeholder="3x4mpl3" />
+          </div>
         </div>
         <button>Register</button>
       </form>
-    </div>
+    </header>
+    <div id="app"></div>
     <script type="module" src="/src/register.ts"></script>
   </body>
 </html>

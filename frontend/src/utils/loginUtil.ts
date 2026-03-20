@@ -1,5 +1,7 @@
 import { loginUser } from "../services/loginService";
 
+const header = document.getElementById("header");
+
 export const initLogin = async () => {
   const email = (document.getElementById("loginEmail") as HTMLInputElement)
     .value;
@@ -7,9 +9,11 @@ export const initLogin = async () => {
     document.getElementById("loginPassword") as HTMLInputElement
   ).value;
 
-  const success = await loginUser(email, password);
+  const loggedInUser = await loginUser(email, password);
 
-  if (success) {
-    window.location.href = "http://localhost:5173";
+  if (loggedInUser) {
+    const status = document.createElement("h2");
+    status.textContent = `Logged in as ${loggedInUser.name}`;
+    header?.appendChild(status);
   }
 };
