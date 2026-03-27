@@ -1,7 +1,8 @@
+import { loginUser } from "../services/loginService";
 import { createUser } from "../services/registerService";
 
 export const initRegister = async () => {
-  const name = (document.getElementById("registerName") as HTMLInputElement)
+  const username = (document.getElementById("registerName") as HTMLInputElement)
     .value;
   const email = (document.getElementById("registerEmail") as HTMLInputElement)
     .value;
@@ -9,10 +10,10 @@ export const initRegister = async () => {
     document.getElementById("registerPassword") as HTMLInputElement
   ).value;
 
-  const success = await createUser({ name, email, password });
+  const success = await createUser({ username, email, password });
 
   if (success) {
-    //await login
+    await loginUser(email, password);
     window.location.href = "http://localhost:5173";
   }
 };

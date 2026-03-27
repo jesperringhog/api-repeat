@@ -8,7 +8,6 @@ import mongoose from "mongoose";
 import { registerRouter } from "./routes/registerRouter.mjs";
 import { loginRouter } from "./routes/loginRouter.mjs";
 import cookieParser from "cookie-parser";
-import { auth } from "./middlewares/auth.mjs";
 
 config();
 
@@ -33,14 +32,19 @@ app.use(cookieParser());
 
 app.use("/register", registerRouter);
 app.use("/login", loginRouter);
-app.use("/chat", auth);
+
+app.get("/ping", (_, res) => {
+  res.status(200).json({ message: "Alive" });
+});
 
 const server = createServer(app);
 
 const io = new Server(server, {
   cors: {
     origin: frontendUrl,
+    credentials: true,
   },
+  cookie: true,
 });
 
 ioOnConnection(io);

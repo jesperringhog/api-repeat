@@ -1,7 +1,15 @@
-import { Schema } from "mongoose";
-import { User } from "./User.mjs";
+import { model, Schema, type InferSchemaType } from "mongoose";
 
-const messageSchema = new Schema({
-    user: { type: User, required: true},
-    message: { type: String, required: true }
-})
+export const messageSchema = new Schema(
+  {
+    from: { type: String, required: true },
+    message: { type: String, required: true },
+  },
+  { timestamps: { createdAt: "time", updatedAt: false } },
+);
+
+const Message = model("message", messageSchema);
+
+export type Message = InferSchemaType<typeof messageSchema>;
+
+export default Message;
