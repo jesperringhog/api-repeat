@@ -13,7 +13,7 @@ export const initLogin = async () => {
 
   if (loggedInUser) {
     const status = document.createElement("h2");
-    status.textContent = `Logged in as ${loggedInUser.name}`;
+    status.textContent = `Logged in as ${loggedInUser.email}`;
     header?.appendChild(status);
   }
 };

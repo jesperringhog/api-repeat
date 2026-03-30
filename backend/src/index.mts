@@ -1,4 +1,4 @@
-import express from "express";
+import express, { json } from "express";
 import { createServer } from "node:http";
 import { Server, Socket } from "socket.io";
 import cors from "cors";
@@ -16,17 +16,17 @@ const mongoUri = process.env.MONGO_URI;
 const frontendUrl = process.env.FRONTEND_URL;
 const jwtSecret = process.env.JWT_SECRET;
 
-if (!port) throw Error("PORT does not exist in .env/invalid key value");
+if (!port) throw new Error("PORT does not exist in .env/invalid key value");
 if (!mongoUri)
-  throw Error("MONGO_URI does not exist in .env/invalid key value");
+  throw new Error("MONGO_URI does not exist in .env/invalid key value");
 if (!frontendUrl)
-  throw Error("FRONTEND_URL does not exist in .env/invalid key value");
+  throw new Error("FRONTEND_URL does not exist in .env/invalid key value");
 if (!jwtSecret)
-  throw Error("JWT_SECRET does not exist in .env/invalid key value");
+  throw new Error("JWT_SECRET does not exist in .env/invalid key value");
 
 const app = express();
 
-app.use(express.json());
+app.use(json());
 app.use(cors({ origin: frontendUrl, credentials: true }));
 app.use(cookieParser());
 

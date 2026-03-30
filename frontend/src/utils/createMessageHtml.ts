@@ -19,4 +19,5 @@ export const createMessageHtml = (userMessage: Message) => {
   messageContainer.appendChild(timeTag);
 
   chatContainer?.appendChild(messageContainer);
+  
 };

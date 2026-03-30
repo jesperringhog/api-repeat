@@ -13,7 +13,7 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
 
     const foundUser = await User.findOne({ email: (user as UserDTO).email });
     if (!foundUser)
-      return res.status(401).send("You are logged in but unautorized");
+      return res.status(401).send("You are logged in but unauthorized");
 
     next();
   } catch (error: any) {

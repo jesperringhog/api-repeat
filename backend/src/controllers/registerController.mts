@@ -5,7 +5,7 @@ import type { RegisterReq } from "../models/requests/RegisterReq.mjs";
 export const createUser = async (req: RegisterReq) => {
   const found = await User.findOne({ email: req.email });
 
-  if (found) throw Error("User already exists");
+  if (found) throw new Error("User already exists");
 
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(req.password, salt);

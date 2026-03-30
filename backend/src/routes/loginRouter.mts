@@ -30,7 +30,7 @@ loginRouter.post("/", async (req, res) => {
         secure: true,
       });
 
-      return res.status(200).json({ name: userDto.name });
+      return res.status(200).json({ name: userDto.username });
     }
 
     res.status(400).json({ message: "Login failed" });

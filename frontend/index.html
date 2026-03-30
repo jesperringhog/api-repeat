@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend</title>
+    <title>Home</title>
   </head>
   <body>
       <header>
@@ -16,12 +16,14 @@
         </a>
       </nav>
     </header>
-    <form id="messageForm">
+    <section id="roomContainer"></section>
+    <section id="chatContainer">
+      <form id="messageForm">
       <label for="messageInput">Write</label>
       <input type="text" id="messageInput" placeholder="message">
       <button>Send</button>
     </form>
-    <section id="chatContainer"></section>
+    </section>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
