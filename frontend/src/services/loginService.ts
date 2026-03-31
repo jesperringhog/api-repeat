@@ -1,16 +1,20 @@
+import axios from "axios";
+
 export const loginUser = async (email: string, password: string) => {
   try {
-    const response = await fetch("http://localhost:3000/login", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
+    const response = await axios.post(
+      "http://localhost:3000/login",
+      {
         email,
         password,
-      }),
-      credentials: "include",
-    });
+      },
+      { withCredentials: true },
+    );
 
-    return response.json();
+    if (response.status >= 200 && response.status < 300) {
+      sessionStorage.setItem("me", response.data.username);
+      return response.data.username;
+    }
   } catch (error) {
     console.error(error);
   }

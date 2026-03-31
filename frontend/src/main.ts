@@ -4,6 +4,9 @@ import { initSendMessage } from "./utils/messageUtil";
 import { socketOnConnect } from "./sockets/socketOnConnect";
 import { socketOnRooms } from "./sockets/socketOnRooms";
 import { socketOnChatHistory } from "./sockets/socketOnChatHistory";
+import { initUserStatus } from "./utils/initUserStatus";
+
+initUserStatus();
 
 const socket = io("http://localhost:3000", {
   withCredentials: true,

@@ -2,8 +2,8 @@ import { model, Schema, type InferSchemaType } from "mongoose";
 import type { UserDTO } from "./UserDTO.mjs";
 
 const userSchema = new Schema({
-  username: { type: String, required: true, minLength: 2 },
-  email: { type: String, required: true },
+  username: { type: String, required: true, minLength: 2, unique: true },
+  email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
 });
 
