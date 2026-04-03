@@ -13,7 +13,7 @@ export const createUser = async (user: User) => {
       { withCredentials: true },
     );
 
-    if (response.status >= 200 && response.status < 300) return response.data.username;
+    if (response.status >= 200 && response.status < 300) return response.data;
 
     return response.status;
   } catch (error) {

@@ -8,6 +8,7 @@ export const socketOnConnect = (socket: Socket) => {
 
     socket.on("newMessage", (newMessage: Message) => {
       createMessageHtml(newMessage);
+      console.log(newMessage);
     });
   });
 };

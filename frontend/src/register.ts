@@ -18,7 +18,7 @@ document
     ).value;
 
     const registeredUser = await createUser({ username, email, password });
-
+    
     if (registeredUser) {
       await loginUser(email, password);
       location.href = BASE_FRONTEND_URL;

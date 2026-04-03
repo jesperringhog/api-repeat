@@ -14,8 +14,8 @@ export const createMessageHtml = (userMessage: Message) => {
   fromTag.textContent = userMessage.from;
   timeTag.textContent = `${time.toLocaleDateString()} ${time.toLocaleTimeString}`;
 
-  messageContainer.appendChild(messageTag);
   messageContainer.appendChild(fromTag);
+  messageContainer.appendChild(messageTag);
   messageContainer.appendChild(timeTag);
 
   chatContainer?.appendChild(messageContainer);

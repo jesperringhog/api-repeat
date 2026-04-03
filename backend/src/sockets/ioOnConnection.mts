@@ -13,9 +13,9 @@ export const ioOnConnection = (io: Server) => {
 
     const loginCookie = await initLoginCookie(socket);
     
-    initSendMessage(socket, loginCookie, io);
-
     initJoinRoom(socket);
+
+    initSendMessage(socket, loginCookie, io);
   });
 };
 

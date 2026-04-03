@@ -8,15 +8,19 @@ export const createUser = async (req: RegisterReq) => {
   if (found) throw new Error("User already exists");
 
   const salt = await bcrypt.genSalt(10);
-  const hash = await bcrypt.hash(req.password, salt);
+  // const hash = await bcrypt.hash(req.password, salt);
 
-  const user = {
+  // const user = {
+  //   username: req.username,
+  //   email: req.email,
+  //   password: hash,
+  // };
+
+  const newUser = await User.create({
     username: req.username,
     email: req.email,
-    password: hash,
-  };
-
-  const newUser = await User.create(user);
+    password: await bcrypt.hash(req.password, salt),
+  });
 
   return dbUserToDto(newUser);
 };

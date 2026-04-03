@@ -1,0 +1,16 @@
+
+
+#chatContainer {
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    overflow: hidden;
+    padding: 1rem;
+
+}
+
+#messageForm {
+    background-color: lightgrey;
+    padding: 1rem;
+}

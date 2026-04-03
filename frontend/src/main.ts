@@ -5,6 +5,7 @@ import { socketOnConnect } from "./sockets/socketOnConnect";
 import { socketOnRooms } from "./sockets/socketOnRooms";
 import { socketOnChatHistory } from "./sockets/socketOnChatHistory";
 import { initUserStatus } from "./utils/initUserStatus";
+import type { RoomState } from "./models/RoomState";
 
 initUserStatus();
 
@@ -12,14 +13,14 @@ const socket = io("http://localhost:3000", {
   withCredentials: true,
 });
 
-let selectedRoom = "";
+const roomState: RoomState = { selectedRoom: ""};
 
 socketOnConnect(socket);
-socketOnRooms(socket, selectedRoom);
+socketOnRooms(socket, roomState);
 socketOnChatHistory(socket);
 
 document.getElementById("messageForm")?.addEventListener("submit", (e) => {
   e.preventDefault();
-  initSendMessage(socket, selectedRoom);
+  initSendMessage(socket, roomState);
 });
 

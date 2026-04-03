@@ -12,10 +12,12 @@ export const loginUser = async (email: string, password: string) => {
     );
 
     if (response.status >= 200 && response.status < 300) {
-      sessionStorage.setItem("me", response.data.username);
-      return response.data.username;
+      console.log(response.data);
+      sessionStorage.setItem("me", response.data.name);
+      return response.data.name;
     }
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
+    return Error;
   }
 };
